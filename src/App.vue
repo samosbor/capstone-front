@@ -1,56 +1,73 @@
 <template>
   <v-app>
-    <v-app-bar
+    <v-navigation-drawer
       app
-      color="primary"
-      dark
+      permanent
     >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
+      <template v-slot:prepend>
+        <v-list>
+          <v-list-item @click="$router.push('/')" style="cursor: pointer">
+            <v-list-item-avatar>
+              <v-img src="https://media.licdn.com/dms/image/C560BAQHQlSTXaVdWrg/company-logo_200_200/0?e=2159024400&v=beta&t=5SfNMkECFR8W1Q0x8lNadENrjnKhR08o-_LgRwbGvtA"></v-img>
+            </v-list-item-avatar>
+            <v-list-item-title>Jolt Dash</v-list-item-title>
+          </v-list-item>
 
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
+          <v-list-item
+            link
+            two-line
+          >
+            <v-list-item-content>
+              <v-list-item-title class="title">Mcdonalds</v-list-item-title>
+              <v-list-item-subtitle>Provo South</v-list-item-subtitle>
+            </v-list-item-content>
+            <v-list-item-action>
+              <v-icon>mdi-menu-down</v-icon>
+            </v-list-item-action>
+          </v-list-item>
+        </v-list>
+      </template>
 
-      <v-spacer></v-spacer>
+      <v-divider></v-divider>
 
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
+      <v-list
+        nav
+        dense
       >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
-    </v-app-bar>
+        <v-list-item link>
+          <v-list-item-icon>
+            <v-icon>mdi-folder</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title>New Customers</v-list-item-title>
+        </v-list-item>
+        <v-list-item link>
+          <v-list-item-icon>
+            <v-icon>mdi-account-multiple</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title>Returning Customers</v-list-item-title>
+        </v-list-item>
+        <v-list-item link to="/testing">
+          <v-list-item-icon>
+            <v-icon>mdi-star</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title>Testing</v-list-item-title>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+
 
     <v-content>
-      <HelloWorld/>
+      <router-view/>
     </v-content>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
 
 export default {
   name: 'App',
 
   components: {
-    HelloWorld,
   },
 
   data: () => ({
