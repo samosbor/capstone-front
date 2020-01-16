@@ -52,6 +52,12 @@
           </v-list-item-icon>
           <v-list-item-title>Testing</v-list-item-title>
         </v-list-item>
+        <v-list-item link to="/testingAthena">
+          <v-list-item-icon>
+            <v-icon>mdi-star</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title>Testing Athena Results</v-list-item-title>
+        </v-list-item>
       </v-list>
     </v-navigation-drawer>
 
