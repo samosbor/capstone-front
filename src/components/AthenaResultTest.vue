@@ -1,26 +1,20 @@
 <template>
   <v-container>
-    <v-layout
-      text-center
-      row
-    >
-      <v-flex mb-4>
-        <h1 class="display-2 font-weight-bold mb-3">
-          This is pulling a result csv from AWS Athena
-        </h1>
-        <p class="subheading font-weight-regular">
-          Also playing with visualization
-        </p>
-      </v-flex>
-      <v-flex>
-        <GChart
-          type="ColumnChart"
-          :data="dataTable"
-          :options="chartOptions"
-        />
-      </v-flex>
-
-    </v-layout>
+    <div mb-4>
+      <h1 class="display-2 font-weight-bold mb-3">
+        This is pulling a result csv from AWS Athena
+      </h1>
+      <p class="subheading font-weight-regular">
+        Also playing with visualization
+      </p>
+    </div>
+      <GChart
+        :settings="{packages: ['bar']}"    
+        :data="dataTable"
+        :options="chartOptions"
+        :createChart="(el, google) => new google.charts.Bar(el)"
+        @ready="onChartReady"
+      />
   </v-container>
 </template>
 
@@ -33,22 +27,24 @@ export default {
   },
   data: () => ({
     dataTable: [],
-    samplechartData: [
-      ['Year', 'Sales', 'Expenses', 'Profit'],
-      ['2014', 1000, 400, 200],
-      ['2015', 1170, 460, 250],
-      ['2016', 660, 1120, 300],
-      ['2017', 1030, 540, 350]
-    ],
-    chartOptions: {
-        chart: {
-          title: 'Number of unique Visitors per day',
-          subtitle: 'Week of 1-14-20',
-          width: 500,
-          height: 400
-        }
-      }
+    chartsLib: null
   }),
+  computed: {
+    chartOptions () {
+      if (!this.chartsLib) return null
+      return this.chartsLib.charts.Bar.convertOptions({
+        chart: {
+          title: 'Number of unique/returning visitors per day',
+          subtitle: 'Week of 1-14-20'
+        },
+        bars: 'horizontal', // Required for Material Bar Charts.
+        hAxis: { format: 'decimal' },
+        width: 700,
+        height: 400,
+        colors: ['#1b9e77', '#d95f02', '#7570b3']
+      })
+    }
+  },
   created() {
     let base = "https://s3.us-east-2.amazonaws.com/jolt.capstone/"
     let filename = "charttest.csv"
@@ -62,7 +58,9 @@ export default {
     })
   },
   methods: {
-
+    onChartReady (chart, google) {
+      this.chartsLib = google
+    }
   }
 };
 </script>
