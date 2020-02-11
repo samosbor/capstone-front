@@ -18,8 +18,8 @@
             two-line
           >
             <v-list-item-content>
-              <v-list-item-title class="title">Mcdonalds</v-list-item-title>
-              <v-list-item-subtitle>Provo South</v-list-item-subtitle>
+              <v-list-item-title class="title">Store Name</v-list-item-title>
+              <v-list-item-subtitle>1</v-list-item-subtitle>
             </v-list-item-content>
             <v-list-item-action>
               <v-icon>mdi-menu-down</v-icon>
@@ -34,17 +34,17 @@
         nav
         dense
       >
-        <v-list-item link>
+        <v-list-item link to="/uniquedaily">
           <v-list-item-icon>
             <v-icon>mdi-folder</v-icon>
           </v-list-item-icon>
-          <v-list-item-title>New Customers</v-list-item-title>
+          <v-list-item-title>Unique daily visitors</v-list-item-title>
         </v-list-item>
         <v-list-item link>
           <v-list-item-icon>
             <v-icon>mdi-account-multiple</v-icon>
           </v-list-item-icon>
-          <v-list-item-title>Returning Customers</v-list-item-title>
+          <v-list-item-title>Unique weekly visitors</v-list-item-title>
         </v-list-item>
         <v-list-item link to="/testing">
           <v-list-item-icon>

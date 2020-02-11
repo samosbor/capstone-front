@@ -28,6 +28,11 @@ const routes = [
     name: 'DemoTest',
     component: DemoTest
   },
+  {
+    path: '/uniquedaily',
+    name: 'UniqueDaily',
+    component: () => import('../components/UniqueDailyCmp.vue')
+  },
 ]
 
 const router = new VueRouter({
