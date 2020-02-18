@@ -36,33 +36,27 @@
       >
         <v-list-item link to="/uniquedaily">
           <v-list-item-icon>
-            <v-icon>mdi-folder</v-icon>
+            <v-icon>mdi-calendar-today</v-icon>
           </v-list-item-icon>
           <v-list-item-title>Unique daily visitors</v-list-item-title>
         </v-list-item>
         <v-list-item link>
           <v-list-item-icon>
-            <v-icon>mdi-account-multiple</v-icon>
+            <v-icon>mdi-calendar-week</v-icon>
           </v-list-item-icon>
           <v-list-item-title>Unique weekly visitors</v-list-item-title>
         </v-list-item>
-        <v-list-item link to="/testing">
+        <v-list-item link>
           <v-list-item-icon>
-            <v-icon>mdi-star</v-icon>
+            <v-icon>mdi-calendar-month</v-icon>
           </v-list-item-icon>
-          <v-list-item-title>Testing</v-list-item-title>
+          <v-list-item-title>Unique monthly visitors</v-list-item-title>
         </v-list-item>
-        <v-list-item link to="/testingAthena">
+        <v-list-item link>
           <v-list-item-icon>
-            <v-icon>mdi-star</v-icon>
+            <v-icon>mdi-calendar-plus</v-icon>
           </v-list-item-icon>
-          <v-list-item-title>Testing Athena Results</v-list-item-title>
-        </v-list-item>
-        <v-list-item link to="/demotest">
-          <v-list-item-icon>
-            <v-icon>mdi-star</v-icon>
-          </v-list-item-icon>
-          <v-list-item-title>Demo Jan 28th</v-list-item-title>
+          <v-list-item-title>Campaigns</v-list-item-title>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
