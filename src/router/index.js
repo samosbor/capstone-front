@@ -17,9 +17,19 @@ const routes = [
     component: TestingAthena
   },
   {
-    path: '/uniquedaily',
-    name: 'UniqueDaily',
-    component: () => import('../views/UniqueDaily.vue')
+    path: '/daily',
+    name: 'Daily',
+    component: () => import('../views/Daily.vue')
+  },
+  {
+    path: '/weekly',
+    name: 'Weekly',
+    component: () => import('../views/Weekly.vue')
+  },
+  {
+    path: '/monthly',
+    name: 'Monthly',
+    component: () => import('../views/Monthly.vue')
   },
 ]
 

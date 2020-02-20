@@ -34,25 +34,25 @@
         nav
         dense
       >
-        <v-list-item link to="/uniquedaily">
+        <v-list-item link to="/daily">
           <v-list-item-icon>
             <v-icon>mdi-calendar-today</v-icon>
           </v-list-item-icon>
-          <v-list-item-title>Unique daily visitors</v-list-item-title>
+          <v-list-item-title>Daily Stats</v-list-item-title>
         </v-list-item>
-        <v-list-item link>
+        <v-list-item link to="/weekly">
           <v-list-item-icon>
             <v-icon>mdi-calendar-week</v-icon>
           </v-list-item-icon>
-          <v-list-item-title>Unique weekly visitors</v-list-item-title>
+          <v-list-item-title>Weekly Stats</v-list-item-title>
         </v-list-item>
-        <v-list-item link>
+        <v-list-item link to="/monthly">
           <v-list-item-icon>
             <v-icon>mdi-calendar-month</v-icon>
           </v-list-item-icon>
-          <v-list-item-title>Unique monthly visitors</v-list-item-title>
+          <v-list-item-title>Monthly Stats</v-list-item-title>
         </v-list-item>
-        <v-list-item link>
+        <v-list-item link to="/campaigns">
           <v-list-item-icon>
             <v-icon>mdi-calendar-plus</v-icon>
           </v-list-item-icon>
