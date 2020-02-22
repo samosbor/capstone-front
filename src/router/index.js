@@ -31,6 +31,11 @@ const routes = [
     name: 'Monthly',
     component: () => import('../views/Monthly.vue')
   },
+  {
+    path: '/campaigns',
+    name: 'Campaigns',
+    component: () => import('../views/Campaigns.vue')
+  },
 ]
 
 const router = new VueRouter({
