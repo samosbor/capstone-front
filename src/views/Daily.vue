@@ -25,7 +25,7 @@
         <v-date-picker v-model="date" @input="getChartData()" landscape></v-date-picker>
       </v-col>
     </v-row>
-    <v-card v-if="dataTable.length > 0" class="pa-5">
+    <v-card v-if="dataTable.length > 0 && selectedQuery.chart" class="pa-5">
       <GChart
         :settings="{packages: ['bar']}"    
         :data="dataTable"
@@ -35,6 +35,19 @@
         width="90%"
       />
     </v-card>
+    <div v-else-if="dataTable.length > 0 && !selectedQuery.chart">
+      <v-card class="pa-5">
+        <v-card-title>
+          {{selectedQuery.chartTitle}}
+        </v-card-title>
+        <v-card-subtitle>
+          {{date}}
+        </v-card-subtitle>
+        <h1 class="pl-5">
+          {{dataTable[1].toString()}}
+        </h1>
+      </v-card>
+    </div>
     <div v-else>
       No results to show
     </div>
@@ -44,7 +57,7 @@
 <script>
 import exportService from '@/misc/exportService.js'
 export default {
-  name: 'UniqueDailyCmp',
+  name: 'Daily',
   components: {
     
   },
@@ -53,18 +66,25 @@ export default {
     chartsLib: null,
     date: "",
     storeName: "store_name_1",
-    query: "unique_per_hour",
-    selectedQuery: "",
+    selectedQuery: {},
     queries: [
       {
         name: "Unique per hour",
         query: "unique_per_hour",
-        chartTitle: "Number of Unique Visitors Per Hour"
+        chartTitle: "Number of Unique Visitors Per Hour",
+        chart: true
       },
       {
         name: "Daily total",
         query: "daily_total_unique",
-        chartTitle: "Total Visitors Per Day"
+        chartTitle: "Total Visitors On This Day",
+        chart: false
+      },
+      {
+        name: "Avg Duration",
+        query: "daily_avg_duration",
+        chartTitle: "Avg Minutes Spent In Store Per Visitor",
+        chart: false
       },
     ]
   }),
@@ -79,7 +99,7 @@ export default {
         hAxis: { format: 'decimal' },
         colors: ['#1b9e77', '#d95f02', '#7570b3']
       })
-    }
+    },
   },
   created() {
     this.setCurrentDate()
@@ -111,8 +131,14 @@ export default {
           dynamicTyping: true,
           complete: (results) => {
             results.data.pop()
+            if (this.selectedQuery.query === "daily_avg_duration") {
+              results.data[1][0] = results.data[1][0].toFixed(1)
+            }
             this.dataTable = results.data
           }
+      })
+      .catch((error) => {
+          this.dataTable = []
       })
         })
         .catch((error) => {
