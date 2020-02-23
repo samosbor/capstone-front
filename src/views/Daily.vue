@@ -22,7 +22,7 @@
         <v-btn @click="exportToCsv()" bottom>Export</v-btn>
       </v-col>
       <v-col>
-        <v-date-picker v-model="date" @input="getChartData()" landscape></v-date-picker>
+        <v-date-picker v-model="date" :max="today" @input="getChartData()" landscape ></v-date-picker>
       </v-col>
     </v-row>
     <v-card v-if="dataTable.length > 0 && selectedQuery.chart" class="pa-5">
@@ -65,6 +65,7 @@ export default {
     dataTable: [],
     chartsLib: null,
     date: "",
+    today: "",
     storeName: "store_name_1",
     selectedQuery: {},
     queries: [
@@ -113,6 +114,7 @@ export default {
       var today = new Date()
       var date = today.getFullYear()+'-0'+(today.getMonth()+1)+'-'+today.getDate()
       this.date = date
+      this.today = date
     },
     getChartData() {
       let base = "https://s3.us-east-2.amazonaws.com/jolt.capstone/"

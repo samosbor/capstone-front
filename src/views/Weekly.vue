@@ -25,6 +25,7 @@
         <v-date-picker 
           v-model="date" 
           :allowed-dates="allowedDates"
+          :max="today"
           @input="getChartData()" 
           landscape>
         </v-date-picker>
@@ -70,6 +71,7 @@ export default {
     dataTable: [],
     chartsLib: null,
     date: "",
+    today: "",
     storeName: "store_name_1",
     selectedQuery: {},
     queries: [
@@ -124,6 +126,7 @@ export default {
       var today = new Date()
       var date = today.getFullYear()+'-0'+(today.getMonth()+1)+'-'+today.getDate()
       this.date = date
+      this.today = date
     },
     getChartData() {
       let base = "https://s3.us-east-2.amazonaws.com/jolt.capstone/"
