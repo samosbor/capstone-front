@@ -113,7 +113,7 @@ export default {
   methods: {
     submitCampaign() {
       this.dialog = false
-      let lambdaURL = "https://s3.us-east-2.amazonaws.com/jolt.capstone/"
+      let lambdaURL = "https://383yfs28kd.execute-api.us-east-2.amazonaws.com/dev/campaign"
       this.axios.post(lambdaURL, {
         campaignName: this.campaignName,
         campaignStart: this.startdate,

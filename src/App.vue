@@ -58,6 +58,12 @@
           </v-list-item-icon>
           <v-list-item-title>Campaigns</v-list-item-title>
         </v-list-item>
+        <v-list-item link to="/competitors">
+          <v-list-item-icon>
+            <v-icon>mdi-podium-gold</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title>Competitors</v-list-item-title>
+        </v-list-item>
       </v-list>
     </v-navigation-drawer>
 
