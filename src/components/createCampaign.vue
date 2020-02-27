@@ -113,14 +113,8 @@ export default {
   methods: {
     submitCampaign() {
       this.dialog = false
-      let lambdaURL = "https://383yfs28kd.execute-api.us-east-2.amazonaws.com/dev/campaign"
-      this.axios.post(lambdaURL, {
-        campaignName: this.campaignName,
-        campaignStart: this.startdate,
-        campaignEnd: this.enddate,
-        campaignType: this.type,
-        storeName: this.storeName
-      })
+      let lambdaURL = "https://2wpn18c2c3.execute-api.us-east-2.amazonaws.com/dev/campaign"
+      this.axios.get(lambdaURL)
       .then(response => {
         console.log(response)
       })
