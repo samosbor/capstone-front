@@ -2,15 +2,23 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import TestingAthena from '../views/TestingAthena.vue'
+import LoginComponent from '../views/login.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: Home
-  },
+    redirect: {
+        name: "home",
+        component: Home
+    }
+},
+{
+    path: "/login",
+    name: "login",
+    component: LoginComponent
+},
   {
     path: '/testingAthena',
     name: 'testingAthena',
