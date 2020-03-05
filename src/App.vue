@@ -81,17 +81,13 @@ export default {
 
   data() {
             return {
-                authenticated: false,
-                mockAccount: {
-                    username: "kendall",
-                    password: "password"
-                }
+                
             }
         },
 
   mounted() {
-      if(!this.authenticated) {
-          this.$router.replace({ name: "login" });
+      if((!this.authenticated) && this.$router.name != "login") {
+          this.$router.push('/login').catch((err)=>{console.log(err)});
       }
   },
   methods: {

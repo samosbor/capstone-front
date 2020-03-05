@@ -10,5 +10,10 @@ export const dataStore = Vue.observable({
     userName: "Mr Store Owner",
     email: "storeOwner@gmail.com"
   },
+  authenticated: false,
+  mockAccount: {
+      username: "kendall",
+      password: "password"
+  }
 
 });

@@ -4,26 +4,46 @@
         <input type="text" name="username" v-model="input.username" placeholder="Username" />
         <input type="password" name="password" v-model="input.password" placeholder="Password" />
         <button type="button" v-on:click="login()">Login</button>
+
+          <div class="text-center ma-2">
+            <v-snackbar
+            v-model="snackbar"
+            >
+            {{}}
+            <v-btn
+                color="pink"
+                text
+                @click="snackbar = false"
+            >
+                Close
+            </v-btn>
+            </v-snackbar>
+        </div>
+
     </div>
+
 </template>
 
 <script>
+import {dataStore} from '../misc/dataStore'
     export default {
         name: 'Login',
-        data() {
-            return {
+        data: () => ({
                 input: {
                     username: "",
                     password: ""
-                }
-            }
-        },
+                },
+                snackbar: false,
+                message : "Hello there",
+                store : dataStore,
+        }),
         methods: {
             login() {
                 if(this.input.username != "" && this.input.password != "") {
-                    if(this.input.username == this.$parent.mockAccount.username && this.input.password == this.$parent.mockAccount.password) {
+                    this.snackbar = true;
+                    if(this.input.username == this.store.mockAccount.username && this.input.password == this.store.mockAccount.password) {
                         this.$emit("authenticated", true);
-                        this.$router.replace({ name: "home" });
+                        this.$router.push('/home');
                     } else {
                         console.log("The username and / or password is incorrect");
                     }
