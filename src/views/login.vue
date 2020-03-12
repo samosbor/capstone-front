@@ -1,33 +1,17 @@
 <template>
     <div id="login">
-        <h1>Login</h1>
-        <input type="text" name="username" v-model="input.username" placeholder="Username" />
-        <input type="password" name="password" v-model="input.password" placeholder="Password" />
-        <button type="button" v-on:click="login()">Login</button>
-
-          <div class="text-center ma-2">
-            <v-snackbar
-            v-model="snackbar"
-            >
-            {{}}
-            <v-btn
-                color="pink"
-                text
-                @click="snackbar = false"
-            >
-                Close
-            </v-btn>
-            </v-snackbar>
-        </div>
-
+        <amplify-authenticator></amplify-authenticator>
     </div>
 
 </template>
 
 <script>
 import {dataStore} from '../misc/dataStore'
+import { AmplifyEventBus, components } from "aws-amplify-vue" 
+
     export default {
         name: 'Login',
+        components: {components},
         data: () => ({
                 input: {
                     username: "",
@@ -36,22 +20,58 @@ import {dataStore} from '../misc/dataStore'
                 snackbar: false,
                 message : "Hello there",
                 store : dataStore,
-        }),
-        methods: {
-            login() {
-                if(this.input.username != "" && this.input.password != "") {
-                    this.snackbar = true;
-                    if(this.input.username == this.store.mockAccount.username && this.input.password == this.store.mockAccount.password) {
-                        this.$emit("authenticated", true);
-                        this.$router.push('/home');
-                    } else {
-                        console.log("The username and / or password is incorrect");
+                authConfig: {
+                    signUpConfig: {
+                        header: 'My Customized Sign Up',
+                        hideAllDefaults: true,
+                        defaultCountryCode: '1',
+                        signUpFields: [
+                        {
+                            label: 'Email',
+                            key: 'email',
+                            required: true,
+                            displayOrder: 1,
+                            type: 'string',
+                            signUpWith: true
+                        },
+                        {
+                            label: 'Password',
+                            key: 'password',
+                            required: true,
+                            displayOrder: 2,
+                            type: 'password'
+                        },
+                        {
+                            label: 'PhoneNumber',
+                            key: 'phone_number',
+                            required: true,
+                            displayOrder: 3,
+                            type: 'string'
+                        },
+                        {
+                            label: 'Custom Attribute',
+                            key: 'custom_attr',
+                            required: false,
+                            displayOrder: 4,
+                            type: 'string',
+                            custom: true
+                        }
+                        ]
                     }
-                } else {
-                    console.log("A username and password must be present");
-                }
+                    },
+        }),
+        mounted() {
+            AmplifyEventBus.$on("authState", eventInfo => {
+            if (eventInfo === "signedIn") {
+                this.$emit("authenticated", true);
+                this.$router.push('/home');
+            } else if (eventInfo === "signedOut") {
+                this.$emit("authenticated",false);
+                this.$router.push('/login')
             }
+            });
         }
+
     }
 </script>
 
