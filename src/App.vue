@@ -1,22 +1,18 @@
 <template>
   <v-app>
-    <v-navigation-drawer
-      app
-      permanent
-    >
+    <v-navigation-drawer v-if="authenticated" app permanent>
       <template v-slot:prepend>
         <v-list>
           <v-list-item @click="$router.push('/')" style="cursor: pointer">
             <v-list-item-avatar>
-              <v-img src="https://media.licdn.com/dms/image/C560BAQHQlSTXaVdWrg/company-logo_200_200/0?e=2159024400&v=beta&t=5SfNMkECFR8W1Q0x8lNadENrjnKhR08o-_LgRwbGvtA"></v-img>
+              <v-img
+                src="https://media.licdn.com/dms/image/C560BAQHQlSTXaVdWrg/company-logo_200_200/0?e=2159024400&v=beta&t=5SfNMkECFR8W1Q0x8lNadENrjnKhR08o-_LgRwbGvtA"
+              ></v-img>
             </v-list-item-avatar>
             <v-list-item-title>Jolt Dash</v-list-item-title>
           </v-list-item>
 
-          <v-list-item
-            link
-            two-line
-          >
+          <v-list-item link two-line>
             <v-list-item-content>
               <v-list-item-title class="title">Store Name</v-list-item-title>
               <v-list-item-subtitle>1</v-list-item-subtitle>
@@ -30,10 +26,7 @@
 
       <v-divider></v-divider>
 
-      <v-list
-        nav
-        dense
-      >
+      <v-list nav dense>
         <v-list-item link to="/daily">
           <v-list-item-icon>
             <v-icon>mdi-calendar-today</v-icon>
@@ -67,40 +60,41 @@
       </v-list>
     </v-navigation-drawer>
 
-
     <v-content>
-      <router-view/>
+      <router-view @authenticated="setAuthenticated(true)" />
     </v-content>
   </v-app>
 </template>
 
 <script>
-
+import {dataStore} from './misc/dataStore'
 export default {
-  name: 'App',
+  name: "App",
 
   data() {
-            return {
-                
-            }
-        },
+    return {
+      authenticated: false,
+      dataStore
+    };
+  },
 
   mounted() {
-      if((!this.authenticated) && this.$router.name != "login") {
-          this.$router.push('/login').catch((err)=>{console.log(err)});
-      }
+    if (!this.authenticated && this.$router.name != "login") {
+      this.$router.push("/login").catch(err => {
+        console.log(err);
+      });
+    }
   },
   methods: {
-      setAuthenticated(status) {
-          this.authenticated = status;
-      },
-      logout() {
-          this.authenticated = false;
-      }
+    setAuthenticated(status) {
+      this.authenticated = status;
+      this.dataStore.authenticated = status
+    },
+    logout() {
+      this.authenticated = false;
+    }
   },
 
-  components: {
-  },
-
+  components: {}
 };
 </script>
