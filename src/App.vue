@@ -58,6 +58,7 @@
           <v-list-item-title>Competitors</v-list-item-title>
         </v-list-item>
       </v-list>
+      <amplify-sign-out align="center"></amplify-sign-out>
     </v-navigation-drawer>
 
     <v-content>
