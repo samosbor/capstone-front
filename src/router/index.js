@@ -48,6 +48,11 @@ const routes = [
     name: 'Campaigns',
     component: () => import('../views/Campaigns.vue')
   },
+  {
+    path: '/range',
+    name: 'RangeConfig',
+    component: () => import('../views/RangeConfig.vue')
+  },
 ]
 
 const router = new VueRouter({
