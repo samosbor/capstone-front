@@ -176,7 +176,7 @@ export default {
 
         if(this.selectedQuery.query === "total_per_hour"){
             filteredData.push(["time", "# of customers"])
-            for(var hour = 0; hour <= 24; hour++){
+            for(var hour = 0; hour < 24; hour++){
                 filteredData.push([this.date + " " + hour + ":00", 0])
             }
         }
