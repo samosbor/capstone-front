@@ -56,12 +56,14 @@
 
 <script>
 import exportService from '@/misc/exportService.js'
+import {dataStore} from '../misc/dataStore'
 export default {
   name: 'Daily',
   components: {
     
   },
   data: () => ({
+    dataStore,
     dataTable: [],
     chartsLib: null,
     date: "",
@@ -119,7 +121,7 @@ export default {
     getChartData() {
       let base = "https://s3.us-east-2.amazonaws.com/jolt.capstone/"
       //let pretest = "athena-query-logs/store_name_1/unique_per_hour/2020-01-07"
-      let prefix = "athena-query-logs/" + this.storeName + "/" + this.selectedQuery.query + "/" + this.date + "/"
+      let prefix = "athena-query-logs/" + this.dataStore.currentStoreName + "/" + this.selectedQuery.query + "/" + this.date + "/"
       this.axios.get(base+"?prefix="+prefix)
         .then((response) => {
           var parser = new DOMParser();

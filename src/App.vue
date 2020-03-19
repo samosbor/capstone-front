@@ -12,15 +12,30 @@
             <v-list-item-title>Jolt Dash</v-list-item-title>
           </v-list-item>
 
-          <v-list-item link two-line>
-            <v-list-item-content>
-              <v-list-item-title class="title">Store Name</v-list-item-title>
-              <v-list-item-subtitle>1</v-list-item-subtitle>
-            </v-list-item-content>
-            <v-list-item-action>
-              <v-icon>mdi-menu-down</v-icon>
-            </v-list-item-action>
-          </v-list-item>
+          <v-menu offset-y>
+            <template v-slot:activator="{ on }">
+              <v-list-item two-line v-on="on">
+                <v-list-item-content>
+                  <v-list-item-title class="title">{{dataStore.currentStore.readableName}}</v-list-item-title>
+                  <v-list-item-subtitle>{{dataStore.currentStore.readableSubName}}</v-list-item-subtitle>
+                </v-list-item-content>
+                <v-list-item-action>
+                  <v-icon>mdi-menu-down</v-icon>
+                </v-list-item-action>
+              </v-list-item>
+            </template>
+            <v-list>
+              <v-list-item
+                v-for="(item, index) in dataStore.ownedStores"
+                :key="index"
+                two-line
+                @click="setStore(item)"
+              >
+                <v-list-item-title>{{ item.readableName }}</v-list-item-title>
+                <v-list-item-subtitle>{{item.readableSubName}}</v-list-item-subtitle>
+              </v-list-item>
+            </v-list>
+          </v-menu>
         </v-list>
       </template>
 
@@ -39,12 +54,12 @@
           </v-list-item-icon>
           <v-list-item-title>Weekly Stats</v-list-item-title>
         </v-list-item>
-        <v-list-item link to="/monthly">
+        <!-- <v-list-item link to="/monthly">
           <v-list-item-icon>
             <v-icon>mdi-calendar-month</v-icon>
           </v-list-item-icon>
           <v-list-item-title>Monthly Stats</v-list-item-title>
-        </v-list-item>
+        </v-list-item>-->
         <v-list-item link to="/campaigns">
           <v-list-item-icon>
             <v-icon>mdi-calendar-plus</v-icon>
@@ -68,7 +83,7 @@
 </template>
 
 <script>
-import {dataStore} from './misc/dataStore'
+import { dataStore } from "./misc/dataStore";
 export default {
   name: "App",
 
@@ -89,10 +104,14 @@ export default {
   methods: {
     setAuthenticated(status) {
       this.authenticated = status;
-      this.dataStore.authenticated = status
+      this.dataStore.authenticated = status;
     },
     logout() {
       this.authenticated = false;
+    },
+    setStore(store) {
+      dataStore.currentStore = store;
+      dataStore.currentStoreName = store.storeName;
     }
   },
 
