@@ -15,6 +15,7 @@
       </v-col>
       <v-col cols="9">
         <v-card v-if="dataTable.length > 0" class="pa-5 my-5">
+          Historical Data
           <GChart
             :settings="{packages: ['corechart']}"
             :data="dataTable"
@@ -25,6 +26,7 @@
           />
         </v-card>
         <v-card v-if="data2.length > 0" class="pa-5 my-5">
+          Campaign Data
           <GChart
             :settings="{packages: ['corechart']}"
             :data="data2"
