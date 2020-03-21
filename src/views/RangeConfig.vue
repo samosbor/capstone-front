@@ -6,7 +6,7 @@
           Range Config Stats
         </h1>
         <p class="subheading font-weight-regular">
-          Choose a query to get started
+          
         </p>
         <v-spacer></v-spacer>
         <v-select
@@ -29,7 +29,7 @@
           solo
           @change="getChartData()"
         ></v-select>
-        <v-btn @click="exportToCsv()" bottom>Export</v-btn>
+        <v-btn @click="saveRange()">Save range preference</v-btn>
       </v-col>
       <v-col>
         <v-date-picker v-model="date" :max="today" @input="getChartData()" landscape ></v-date-picker>
@@ -79,8 +79,13 @@ export default {
     date: "",
     today: "",
     storeName: "heritage_15",
-    selectedQuery: {},
-    range: null,
+    selectedQuery: {
+        name: "Total per hour",
+        query: "total_per_hour",
+        chartTitle: "Number of Total Visitors Per Hour",
+        chart: true
+      },
+    range: -999,
     RANGE_MAX: -999,
     RANGE_MED: -80,
     RANGE_MIN: -60,
@@ -190,8 +195,8 @@ export default {
         }
         return filteredData
     },
-    exportToCsv() {
-      exportService.exportToCSV(this.storeName + "_" + this.query + "_" + this.date, this.dataTable)
+    saveRange() {
+      
     }
   }
 };

@@ -74,7 +74,7 @@
         </v-list-item>
         <v-list-item link to="/range">
           <v-list-item-icon>
-            <v-icon>mdi-podium-gold</v-icon>
+            <v-icon>mdi-signal-distance-variant</v-icon>
           </v-list-item-icon>
           <v-list-item-title>Range Config</v-list-item-title>
         </v-list-item>
