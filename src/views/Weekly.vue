@@ -74,7 +74,12 @@ export default {
     date: "",
     today: "",
     storeName: "store_name_1",
-    selectedQuery: {},
+    selectedQuery: {
+        name: "Unique per day",
+        query: "unique_per_day_by_week",
+        chartTitle: "Number of Unique Visitors Per Day",
+        chart: true
+      },
     queries: [
       {
         name: "Unique per day",
@@ -111,7 +116,7 @@ export default {
           subtitle: this.date
         },
         hAxis: { format: 'decimal' },
-        colors: ['#1b9e77', '#d95f02', '#7570b3']
+        height: 300
       })
     },
   },

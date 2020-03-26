@@ -61,6 +61,20 @@
     <div v-else>
       No results to show
     </div>
+
+    <v-snackbar
+      v-model="snackbar"
+      timeout="5000"
+    >
+      Range has been updated for future data
+      <v-btn
+        color="pink"
+        text
+        @click="snackbar = false"
+      >
+        Close
+      </v-btn>
+    </v-snackbar>
   </v-container>
 </template>
 
@@ -74,6 +88,7 @@ export default {
   },
   data: () => ({
     dataStore,
+    snackbar: false,
     dataTable: [],
     chartsLib: null,
     date: "",
@@ -114,15 +129,17 @@ export default {
   }),
   computed: {
     chartOptions () {
-      if (!this.chartsLib) return null
-      return this.chartsLib.charts.Bar.convertOptions({
+      return {
         chart: {
           title: this.selectedQuery.chartTitle,
           subtitle: this.date
         },
-        hAxis: { format: 'decimal' },
-        colors: ['#1b9e77', '#d95f02', '#7570b3']
-      })
+        vAxis: {
+          title: "nice",
+          ticks: [0, 100, 200,]
+        },
+        height: 300
+      }
     },
   },
   created() {
@@ -196,7 +213,7 @@ export default {
         return filteredData
     },
     saveRange() {
-      
+      this.snackbar = true
     }
   }
 };

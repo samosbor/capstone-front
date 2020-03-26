@@ -69,7 +69,12 @@ export default {
     date: "",
     today: "",
     storeName: "store_name_1",
-    selectedQuery: {},
+    selectedQuery: {
+        name: "Unique per hour",
+        query: "unique_per_hour",
+        chartTitle: "Number of Unique Visitors Per Hour",
+        chart: true
+      },
     queries: [
       {
         name: "Unique per hour",
@@ -100,7 +105,7 @@ export default {
           subtitle: this.date
         },
         hAxis: { format: 'decimal' },
-        colors: ['#1b9e77', '#d95f02', '#7570b3']
+        height: 300
       })
     },
   },
