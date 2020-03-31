@@ -60,6 +60,12 @@
           </v-list-item-icon>
           <v-list-item-title>Monthly Stats</v-list-item-title>
         </v-list-item>-->
+        <v-list-item link to="/leaderboard">
+          <v-list-item-icon>
+            <v-icon>mdi-podium-gold</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title>Leaderboard</v-list-item-title>
+        </v-list-item>
         <v-list-item link to="/campaigns">
           <v-list-item-icon>
             <v-icon>mdi-calendar-plus</v-icon>

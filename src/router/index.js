@@ -39,9 +39,9 @@ const routes = [
     component: () => import('../views/Weekly.vue')
   },
   {
-    path: '/monthly',
-    name: 'Monthly',
-    component: () => import('../views/Monthly.vue')
+    path: '/leaderboard',
+    name: 'Leaderboard',
+    component: () => import('../views/Leaderboard.vue')
   },
   {
     path: '/campaigns',
