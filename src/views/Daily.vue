@@ -104,7 +104,6 @@ export default {
           title: this.selectedQuery.chartTitle,
           subtitle: this.date
         },
-        hAxis: { format: 'decimal' },
         height: 300
       })
     },

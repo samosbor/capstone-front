@@ -114,15 +114,15 @@ export default {
     ],
     rangeValues: [
       {
-        name: "100 ft",
+        name: "Long",
         value: -999,
       },
       {
-        name: "60 ft",
+        name: "Medium",
         value: -80,
       },
       {
-        name: "30 ft",
+        name: "Short",
         value: -60,
       },
     ],

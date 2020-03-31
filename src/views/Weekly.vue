@@ -135,9 +135,14 @@ export default {
       this.today = date
     },
     getChartData() {
+      let weekdate = this.date
+      if(this.date.slice(8,9) === "0"){
+        weekdate = this.date.slice(0,8) + this.date.slice(9,10)
+      }
+
       let base = "https://s3.us-east-2.amazonaws.com/jolt.capstone/"
       //let pretest = "athena-query-logs/store_name_1/unique_per_hour/2020-01-07"
-      let prefix = "athena-query-logs/" + this.dataStore.currentStoreName + "/" + this.selectedQuery.query + "/" + this.date + "/"
+      let prefix = "athena-query-logs/" + this.dataStore.currentStoreName + "/" + this.selectedQuery.query + "/" + weekdate + "/"
       this.axios.get(base+"?prefix="+prefix)
         .then((response) => {
           var parser = new DOMParser();
@@ -164,6 +169,13 @@ export default {
         .catch((error) => {
           this.dataTable = []
       })
+      this.getLastWeek()
+    },
+    getLastWeek() {
+      let currDate = Date.parse(this.date)
+      console.log(currDate)
+      let lastWeek = new Date(currDate.getFullYear(), currDate.getMonth(), currDate.getDate() - 7)
+      console.log(lastWeek)
     },
     exportToCsv() {
       exportService.exportToCSV(this.storeName + "_" + this.query + "_" + this.date, this.dataTable)
