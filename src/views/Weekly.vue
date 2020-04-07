@@ -129,10 +129,10 @@ export default {
     },
     async getChartData() {
       let weekdate = this.date;
-      if (this.date.slice(8, 9) === "0") {
-        if(this.storeName === "heritage_15")
-          weekdate = this.date.slice(0, 8) + this.date.slice(9, 10);
-      }
+      // if (this.date.slice(8, 9) === "0") {
+      //   if(this.storeName === "heritage_15")
+      //     weekdate = this.date.slice(0, 8) + this.date.slice(9, 10);
+      // }
 
       let base = "https://s3.us-east-2.amazonaws.com/jolt.capstone/";
       //let pretest = "athena-query-logs/store_name_1/unique_per_hour/2020-01-07"
