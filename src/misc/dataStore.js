@@ -3,6 +3,7 @@ import Vue from "vue";
 export const dataStore = Vue.observable({
   ownedStores: [{storeName: "store_name_1", readableName: "Store Name", readableSubName: "1"},
                 {storeName: "heritage_15", readableName: "Heritage", readableSubName: "15"},
+                {storeName: "heritage_16", readableName: "Heritage", readableSubName: "16"},
                 {storeName: "sams_house", readableName: "Sam's House", readableSubName: ""}],
   currentStore: {storeName: "store_name_1", readableName: "Store Name", readableSubName: "1"},
   currentStoreName: "store_name_1",
