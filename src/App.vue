@@ -85,8 +85,22 @@
           <v-list-item-title>Range Config</v-list-item-title>
         </v-list-item>
       </v-list>
-      <amplify-sign-out align="center"></amplify-sign-out>
+      <amplify-sign-out @click="setAuthenticated(false)" align="center"></amplify-sign-out>
     </v-navigation-drawer>
+
+    <v-btn dark @click="snackbar = true">Open Snackbar</v-btn>
+    <v-snackbar
+      v-model="snackbar"
+    >
+      {{ this.message }}
+      <v-btn
+        color="pink"
+        text
+        @click="snackbar = false"
+      >
+        Close
+      </v-btn>
+    </v-snackbar>
 
     <v-content>
       <router-view @authenticated="setAuthenticated(true)" />
@@ -102,7 +116,12 @@ export default {
   data() {
     return {
       authenticated: false,
-      dataStore
+      dataStore,
+      snackbar: false,
+      message: Object.keys(localStorage),
+      //https://www.npmjs.com/package/vue-jwt-decode
+      //https://stackoverflow.com/questions/41828359/how-do-i-access-the-group-for-a-cognito-user-account
+      //to determine which stores the user manages based on congnito user groups.
     };
   },
 
@@ -117,9 +136,11 @@ export default {
     setAuthenticated(status) {
       this.authenticated = status;
       this.dataStore.authenticated = status;
+      this.snackbar = status
     },
     logout() {
       this.authenticated = false;
+      this.dataStore.authenticated = status;
     },
     setStore(store) {
       dataStore.currentStore = store;
