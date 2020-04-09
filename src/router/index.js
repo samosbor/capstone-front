@@ -53,6 +53,11 @@ const routes = [
     name: 'RangeConfig',
     component: () => import('../views/RangeConfig.vue')
   },
+  {
+    path: '/competitors',
+    name: 'Competitors',
+    component: () => import('../views/Competitors.vue')
+  }
 ]
 
 const router = new VueRouter({
