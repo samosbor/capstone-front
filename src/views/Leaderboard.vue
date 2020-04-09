@@ -92,7 +92,20 @@
                 query: "weekly_total_unique",
                 chartTitle: "Total Visitors in the Week",
                 chart: true
-            },]
+            },
+            {
+                name: "Repeat Visitors",
+                query: "weekly_total_repeat_customers",
+                chartTitle: "Total Number of Repeat Visitors",
+                chart: true
+            },
+            {
+                name: "Weekly Average Duration",
+                query: "weekly_avg_duration",
+                chartTitle: "Avg Minutes Spent In Store Per Visitor",
+                chart: true
+            },
+            ]
         }),
         computed: {
             chartOptions() {
@@ -123,14 +136,21 @@
             },
             async getChartData() {
                 let base = "https://s3.us-east-2.amazonaws.com/jolt.capstone/";
-                //let pretest = "athena-query-logs/store_name_1/unique_per_hour/2020-01-07"
+
                 var leaderBoard = [];
-                if(this.selectedQuery.query === "daily_total_unique" ||
-                    this.selectedQuery.query === "weekly_total_unique"){
-                    leaderBoard.push(["store", "visits"]);
-                }
-                else if(this.selectedQuery.query === "daily_avg_duration"){
-                    leaderBoard.push(["store", "visit duration"]);
+                switch(this.selectedQuery.query){
+                    case "daily_avg_duration":
+                        leaderBoard.push(["store", "visit duration (min)"]);
+                        break;
+                    case "weekly_avg_duration":
+                        leaderBoard.push(["store", "visit duration (min)"]);
+                        break;
+                    case "weekly_total_repeat_customers":
+                        leaderBoard.push(["store", "repeat visits"]);
+                        break;
+                    default:
+                        leaderBoard.push(["store", "visits"]);
+                        break;
                 }
 
                 for (var i = 0; i < dataStore.ownedStores.length; i++) {
