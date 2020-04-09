@@ -80,7 +80,32 @@
                 query: "daily_total_unique",
                 chartTitle: "Total Visitors On This Day",
                 chart: true
-            }, ]
+            },
+            {
+                name: "Daily Average Duration",
+                query: "daily_avg_duration",
+                chartTitle: "Avg Minutes Spent In Store Per Visitor",
+                chart: true
+            },
+            {
+                name: "Weekly total",
+                query: "weekly_total_unique",
+                chartTitle: "Total Visitors in the Week",
+                chart: true
+            },
+            {
+                name: "Repeat Visitors",
+                query: "weekly_total_repeat_customers",
+                chartTitle: "Total Number of Repeat Visitors",
+                chart: true
+            },
+            {
+                name: "Weekly Average Duration",
+                query: "weekly_avg_duration",
+                chartTitle: "Avg Minutes Spent In Store Per Visitor",
+                chart: true
+            },
+            ]
         }),
         computed: {
             chartOptions() {
@@ -111,12 +136,25 @@
             },
             async getChartData() {
                 let base = "https://s3.us-east-2.amazonaws.com/jolt.capstone/";
-                //let pretest = "athena-query-logs/store_name_1/unique_per_hour/2020-01-07"
+
                 var leaderBoard = [];
-                leaderBoard.push(["store", "visits"])
+                switch(this.selectedQuery.query){
+                    case "daily_avg_duration":
+                        leaderBoard.push(["store", "visit duration (min)"]);
+                        break;
+                    case "weekly_avg_duration":
+                        leaderBoard.push(["store", "visit duration (min)"]);
+                        break;
+                    case "weekly_total_repeat_customers":
+                        leaderBoard.push(["store", "repeat visits"]);
+                        break;
+                    default:
+                        leaderBoard.push(["store", "visits"]);
+                        break;
+                }
+
                 for (var i = 0; i < dataStore.ownedStores.length; i++) {
                     var index = i;
-                    console.log("index: " + index);
                     var store = dataStore.ownedStores[i];
                     leaderBoard.push([store.storeName, 0]);
 
@@ -138,7 +176,6 @@
                                         if (this.selectedQuery.query === "daily_avg_duration") {
                                             results.data[1][0] = results.data[1][0].toFixed(1);
                                         }
-                                        console.log(this.dataTable);
                                         leaderBoard[index][1] = results.data[1][0];
                                     }
                                 })
